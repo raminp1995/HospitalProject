@@ -18,4 +18,6 @@ public class PaymentEntity extends BaseEntity
     @ManyToOne
     @JoinColumn(name = "receptionistId")
     private ReceptionistEntity receptionist;
+
+
 }

@@ -17,7 +17,6 @@ import java.time.LocalDate;
 
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -25,11 +24,11 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class PersonEntity extends BaseEntity
 {
-    @NotEmpty
+    //@NotEmpty
     @Column
     private String firstName;
 
-    @NotEmpty
+    //@NotEmpty
     @Column
     private String lastName;
 
@@ -42,15 +41,15 @@ public abstract class PersonEntity extends BaseEntity
     @Column
     private String address;
 
-    @NotBlank
-    @UniqueElements
+    //@NotBlank
+    //@UniqueElements
     private String phone;
 
     @Email
     private String eMail;
 
-    @NotNull
-    @NotEmpty
-    @UniqueElements
+    //@NotNull
+    //@NotEmpty
+    //@UniqueElements
     private String nCode;
 }

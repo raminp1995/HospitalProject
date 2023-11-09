@@ -15,7 +15,7 @@ public interface IBaseService<D>
 
     D getById (Long Id) throws DeletedException;
 
-    D getByName (D dto) throws Exception;
+    D getByName (String name) throws Exception;
 
     void delete (Long id) throws Exception;
 }

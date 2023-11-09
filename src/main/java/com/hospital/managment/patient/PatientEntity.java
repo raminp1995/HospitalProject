@@ -1,6 +1,6 @@
 package com.hospital.managment.patient;
 
-import com.hospital.managment.diagnose.DiagnoseEntity;
+//import com.hospital.managment.diagnose.DiagnoseEntity;
 import com.hospital.managment.doctor.DoctorDetails;
 import com.hospital.managment.doctor.DoctorEntity;
 import com.hospital.managment.person.PersonEntity;
@@ -14,17 +14,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
+//@Builder
 @Entity
 public class PatientEntity extends PersonEntity implements DoctorDetails
 {
+    private String name;
     private Long patientCode;
 
     @ManyToMany(mappedBy = "patients", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<DoctorEntity> doctors = new ArrayList<>();
 
-    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
-    private DiagnoseEntity diagnose;
+//    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
+//    private DiagnoseEntity diagnose;
 
     @Override
     public void viewDoctors()

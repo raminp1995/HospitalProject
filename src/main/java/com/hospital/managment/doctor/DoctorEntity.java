@@ -1,5 +1,6 @@
 package com.hospital.managment.doctor;
 
+//import com.hospital.managment.diagnose.DiagnoseEntity;
 import com.hospital.managment.diagnose.DiagnoseEntity;
 import com.hospital.managment.patient.PatientEntity;
 import com.hospital.managment.staff.StaffEntity;

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @NoRepositoryBean
 public interface IBaseRepository<E> extends JpaRepository<E, Long>
 {
+    E findByName(String name) throws Exception;
 }

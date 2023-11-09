@@ -31,6 +31,11 @@ public abstract class BaseController<S extends IBaseService<D>, D>
         return service.getById(id);
     }
 
+    public D getByName(String name) throws Exception
+    {
+        return service.getByName(name);
+    }
+
     public void delete (Long id) throws Exception
     {
         service.delete(id);

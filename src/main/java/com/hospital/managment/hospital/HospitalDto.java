@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class HospitalDto extends BaseDto
 {
-    private String name;
+
 }

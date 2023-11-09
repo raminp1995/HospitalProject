@@ -31,7 +31,6 @@ public class BaseService<E extends BaseEntity, D extends BaseDto> implements IBa
     public List<D> getAll()
     {
         return baseRepository.findAll().stream().filter(i -> !i.getDeleted()).map(baseMapper::entityToDto).toList();
-
     }
 
     @Override
@@ -85,9 +84,25 @@ public class BaseService<E extends BaseEntity, D extends BaseDto> implements IBa
     }
 
     @Override
-    public D getByName(D dto) throws Exception
+    public D getByName(String name) throws Exception
     {
-        return null;
+        E entity = baseRepository.findByName(name);
+
+        if (entity != null)
+        {
+            if (!entity.getDeleted())
+            {
+                return baseMapper.entityToDto(entity);
+            }
+            else
+            {
+                throw new DeletedException();
+            }
+        }
+        else
+        {
+            throw new NoSuchElementException();
+        }
     }
 
 

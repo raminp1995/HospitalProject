@@ -37,6 +37,12 @@ public class HospitalController extends BaseController<HospitalService, Hospital
         return super.getById(id);
     }
 
+    @GetMapping("/getByName/{name}")
+    @Override
+    public HospitalDto getByName(@PathVariable String name) throws Exception
+    {
+        return super.getByName(name);
+    }
 
     @PutMapping("/update")
     @Override
