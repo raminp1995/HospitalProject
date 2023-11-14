@@ -1,6 +1,7 @@
 package com.hospital.managment.patient;
 
 //import com.hospital.managment.diagnose.DiagnoseEntity;
+import com.hospital.managment.bill.BillEntity;
 import com.hospital.managment.doctor.DoctorDetails;
 import com.hospital.managment.doctor.DoctorEntity;
 import com.hospital.managment.person.PersonEntity;
@@ -14,14 +15,25 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-//@Builder
 @Entity
+@Table(name = "patient")
 public class PatientEntity extends PersonEntity implements DoctorDetails
 {
-    private String name;
-    private Long patientCode;
 
-    @ManyToMany(mappedBy = "patients", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //private Long patientCode;
+
+//    @Enumerated(EnumType.STRING)
+//    private Enum<InsuranceType> insurance;
+
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
+    private BillEntity bill;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "doctor_patient",
+            joinColumns = @JoinColumn(name = "patient_id"),
+            inverseJoinColumns = @JoinColumn(name = "doctor_id"))
     private List<DoctorEntity> doctors = new ArrayList<>();
 
 //    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
