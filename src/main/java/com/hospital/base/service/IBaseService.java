@@ -1,21 +1,24 @@
 package com.hospital.base.service;
 
 import com.hospital.base.exception.DeletedException;
+import com.hospital.managment.doctor.DoctorEntity;
 
 import java.util.List;
 
 
-public interface IBaseService<D>
+public interface IBaseService<ReqDto, ResDto>
 {
-    List<D> getAll();
+    List<ResDto> getAll();
 
-    D save(D dto);
+    ResDto save(ReqDto dto);
 
-    D update (D dto)throws DeletedException;
+    ResDto update (ReqDto dto)throws DeletedException;
 
-    D getById (Long Id) throws DeletedException;
+    ResDto getById (Long Id) throws DeletedException;
 
-    D getByName (String name) throws Exception;
+    ResDto getByName (String name) throws Exception;
 
     void delete (Long id) throws Exception;
+
+    //D findByFirstName(String name) throws Exception;
 }

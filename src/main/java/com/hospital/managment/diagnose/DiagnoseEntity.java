@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "diagnose")
 public class DiagnoseEntity extends BaseEntity
 {
     private String type;

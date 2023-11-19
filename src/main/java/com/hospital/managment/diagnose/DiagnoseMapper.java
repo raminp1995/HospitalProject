@@ -5,10 +5,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DiagnoseMapper implements IBaseMapper<DiagnoseEntity, DiagnoseDto>
+public class DiagnoseMapper implements IBaseMapper<DiagnoseEntity, DiagnoseReqDto, DiagnoseResDto>
 {
     @Override
-    public DiagnoseEntity dtoToEntity(DiagnoseDto dto)
+    public DiagnoseEntity dtoToEntity(DiagnoseReqDto dto)
     {
         DiagnoseEntity diagnose = new DiagnoseEntity();
         BeanUtils.copyProperties(dto, diagnose);
@@ -16,9 +16,9 @@ public class DiagnoseMapper implements IBaseMapper<DiagnoseEntity, DiagnoseDto>
     }
 
     @Override
-    public DiagnoseDto entityToDto(DiagnoseEntity entity)
+    public DiagnoseResDto entityToDto(DiagnoseEntity entity)
     {
-        DiagnoseDto diagnoseDto = new DiagnoseDto();
+        DiagnoseResDto diagnoseDto = new DiagnoseResDto();
         BeanUtils.copyProperties(entity, diagnoseDto);
         return diagnoseDto;
     }

@@ -6,9 +6,9 @@ import com.hospital.base.service.BaseService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PaymentService extends BaseService<PaymentEntity, PaymentDto>
+public class PaymentService extends BaseService<PaymentEntity, PaymentReqDto, PaymentResDto>
 {
-    public PaymentService(IBaseRepository<PaymentEntity> baseRepository, IBaseMapper<PaymentEntity, PaymentDto> baseMapper)
+    public PaymentService(IBaseRepository<PaymentEntity> baseRepository, IBaseMapper<PaymentEntity, PaymentReqDto, PaymentResDto> baseMapper)
     {
         super(baseRepository, baseMapper);
     }

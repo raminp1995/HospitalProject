@@ -12,7 +12,7 @@ public interface PaymentRepository extends IBaseRepository<PaymentEntity>
 {
     @Override
     @Transient
-    default PaymentEntity findByName(String name) throws Exception
+    default PaymentEntity findByFirstName(String name) throws Exception
     {
         return null;
     }

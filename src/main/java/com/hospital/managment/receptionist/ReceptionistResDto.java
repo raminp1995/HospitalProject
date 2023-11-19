@@ -1,4 +1,4 @@
-package com.hospital.managment.payment;
+package com.hospital.managment.receptionist;
 
 import com.hospital.base.model.dto.BaseDto;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 //@AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PaymentDto extends BaseDto
+public class ReceptionistResDto extends BaseDto
 {
 }

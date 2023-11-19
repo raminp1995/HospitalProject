@@ -6,9 +6,9 @@ import com.hospital.base.service.BaseService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DiagnoseService extends BaseService<DiagnoseEntity, DiagnoseDto>
+public class DiagnoseService extends BaseService<DiagnoseEntity, DiagnoseReqDto, DiagnoseResDto>
 {
-    public DiagnoseService(IBaseRepository<DiagnoseEntity> baseRepository, IBaseMapper<DiagnoseEntity, DiagnoseDto> baseMapper)
+    public DiagnoseService(IBaseRepository<DiagnoseEntity> baseRepository, IBaseMapper<DiagnoseEntity, DiagnoseReqDto, DiagnoseResDto> baseMapper)
     {
         super(baseRepository, baseMapper);
     }

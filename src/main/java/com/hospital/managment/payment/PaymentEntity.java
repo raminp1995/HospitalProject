@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "payment")
 public class PaymentEntity extends BaseEntity
 {
     @ManyToOne

@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "patient")
 public class PatientEntity extends PersonEntity implements DoctorDetails
 {
@@ -25,7 +26,7 @@ public class PatientEntity extends PersonEntity implements DoctorDetails
 //    @Enumerated(EnumType.STRING)
 //    private Enum<InsuranceType> insurance;
 
-    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "patient")
     private BillEntity bill;
 
 
@@ -38,6 +39,8 @@ public class PatientEntity extends PersonEntity implements DoctorDetails
 
 //    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
 //    private DiagnoseEntity diagnose;
+
+    private String bloodGroup;
 
     @Override
     public void viewDoctors()

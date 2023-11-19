@@ -5,10 +5,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AdminStaffMapper implements IBaseMapper<AdministrativeStaffEntity, AdminStaffDto>
+public class AdminStaffMapper implements IBaseMapper<AdministrativeStaffEntity, AdminStaffReqDto, AdminStaffResDto>
 {
     @Override
-    public AdministrativeStaffEntity dtoToEntity(AdminStaffDto dto)
+    public AdministrativeStaffEntity dtoToEntity(AdminStaffReqDto dto)
     {
         AdministrativeStaffEntity administrativeStaff = new AdministrativeStaffEntity();
         BeanUtils.copyProperties(dto, administrativeStaff);
@@ -16,9 +16,9 @@ public class AdminStaffMapper implements IBaseMapper<AdministrativeStaffEntity, 
     }
 
     @Override
-    public AdminStaffDto entityToDto(AdministrativeStaffEntity entity)
+    public AdminStaffResDto entityToDto(AdministrativeStaffEntity entity)
     {
-        AdminStaffDto adminStaffDto = new AdminStaffDto();
+        AdminStaffResDto adminStaffDto = new AdminStaffResDto();
         BeanUtils.copyProperties(entity, adminStaffDto);
         return adminStaffDto;
     }

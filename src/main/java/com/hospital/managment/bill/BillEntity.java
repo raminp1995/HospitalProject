@@ -1,5 +1,7 @@
 package com.hospital.managment.bill;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hospital.base.model.entity.BaseEntity;
 import com.hospital.managment.patient.PatientEntity;
 import jakarta.persistence.*;
@@ -10,11 +12,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "bill")
 public class BillEntity extends BaseEntity
 {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patientId")
     private PatientEntity patient;
 
@@ -26,6 +29,6 @@ public class BillEntity extends BaseEntity
 
     private Double medCost;
 
-    @Transient
     private Double allCost;
+
 }

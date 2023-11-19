@@ -5,21 +5,9 @@ import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
-public interface IPatientMapper extends IBaseMapper<PatientEntity, PatientDto>
+public interface IPatientMapper extends IBaseMapper<PatientEntity, PatientReqDto, PatientResDto>
 {
-//    @Override
-//    public PatientEntity dtoToEntity(PatientDto dto)
-//    {
-//        PatientEntity patient = new PatientEntity();
-//        BeanUtils.copyProperties(dto, patient);
-//        return patient;
-//    }
+//    PatientEntity dtoToEntity (PatientReqDto dto);
 //
-//    @Override
-//    public PatientDto entityToDto(PatientEntity entity)
-//    {
-//        PatientDto patientDto = new PatientDto();
-//        BeanUtils.copyProperties(entity, patientDto);
-//        return patientDto;
-//    }
+//    PatientResDto entityToDto (PatientEntity entity);
 }

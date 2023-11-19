@@ -5,10 +5,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReceptionistMapper implements IBaseMapper<ReceptionistEntity, ReceptionistDto>
+public class ReceptionistMapper implements IBaseMapper<ReceptionistEntity, ReceptionistReqDto, ReceptionistResDto>
 {
     @Override
-    public ReceptionistEntity dtoToEntity(ReceptionistDto dto)
+    public ReceptionistEntity dtoToEntity(ReceptionistReqDto dto)
     {
         ReceptionistEntity receptionist = new ReceptionistEntity();
         BeanUtils.copyProperties(dto, receptionist);
@@ -16,9 +16,9 @@ public class ReceptionistMapper implements IBaseMapper<ReceptionistEntity, Recep
     }
 
     @Override
-    public ReceptionistDto entityToDto(ReceptionistEntity entity)
+    public ReceptionistResDto entityToDto(ReceptionistEntity entity)
     {
-        ReceptionistDto receptionistDto = new ReceptionistDto();
+        ReceptionistResDto receptionistDto = new ReceptionistResDto();
         BeanUtils.copyProperties(entity, receptionistDto);
         return receptionistDto;
     }

@@ -6,9 +6,9 @@ import com.hospital.base.service.BaseService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReceptionistService extends BaseService<ReceptionistEntity, ReceptionistDto>
+public class ReceptionistService extends BaseService<ReceptionistEntity, ReceptionistReqDto, ReceptionistResDto>
 {
-    public ReceptionistService(IBaseRepository<ReceptionistEntity> baseRepository, IBaseMapper<ReceptionistEntity, ReceptionistDto> baseMapper)
+    public ReceptionistService(IBaseRepository<ReceptionistEntity> baseRepository, IBaseMapper<ReceptionistEntity, ReceptionistReqDto, ReceptionistResDto> baseMapper)
     {
         super(baseRepository, baseMapper);
     }

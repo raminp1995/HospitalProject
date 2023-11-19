@@ -5,33 +5,37 @@ import com.hospital.base.service.IBaseService;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
-@AllArgsConstructor
-public abstract class BaseController<S extends IBaseService<D>, D>
+
+public abstract class BaseController<S extends IBaseService<ReqDto, ResDto>, ReqDto, ResDto>
 {
 
     private final S service;
+    public BaseController(S service)
+    {
+        this.service = service;
+    }
 
-    public List<D> getAll()
+    public List<ResDto> getAll()
     {
         return service.getAll();
     }
 
-    public D save(D dto)
+    public ResDto save(ReqDto dto)
     {
         return service.save(dto);
     }
 
-    public D update (D dto) throws DeletedException
+    public ResDto update (ReqDto dto) throws DeletedException
     {
         return service.update(dto);
     }
 
-    public D getById (Long id) throws DeletedException
+    public ResDto getById (Long id) throws DeletedException
     {
         return service.getById(id);
     }
 
-    public D getByName(String name) throws Exception
+    public ResDto getByName(String name) throws Exception
     {
         return service.getByName(name);
     }
@@ -40,4 +44,5 @@ public abstract class BaseController<S extends IBaseService<D>, D>
     {
         service.delete(id);
     }
+
 }

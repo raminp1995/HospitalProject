@@ -1,10 +1,7 @@
 package com.hospital.managment.staff;
 
 import com.hospital.managment.person.PersonEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -15,9 +12,11 @@ import java.util.ArrayList;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "staff")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class StaffEntity extends PersonEntity
 {
+
     protected ArrayList<String> certificates;
 
     protected ArrayList<String> educations;

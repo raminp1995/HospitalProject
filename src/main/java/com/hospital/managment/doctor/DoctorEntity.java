@@ -1,9 +1,9 @@
 package com.hospital.managment.doctor;
 
-//import com.hospital.managment.diagnose.DiagnoseEntity;
 import com.hospital.managment.diagnose.DiagnoseEntity;
 import com.hospital.managment.patient.PatientEntity;
 import com.hospital.managment.staff.StaffEntity;
+import com.hospital.managment.timeSlot.TimeSlotEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,33 +11,35 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "doctor")
 public class DoctorEntity extends StaffEntity
 {
-    private String name;
-    private String address;
-    private String phone;
+
     private String speciality;
     private String qualifications;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "doctors")
     private List<PatientEntity> patients = new ArrayList<>();
 
     @OneToOne
     private DiagnoseEntity diagnose;
 
+    //@OneToOne
+    @OneToOne(targetEntity = TimeSlotEntity.class)
+    @JoinColumn(name = "timeSlotId")
+    private TimeSlotEntity timeSlot;
 
-
-    public String displayDoctorInfo()
-    {
-        return "";
-    }
+    @ElementCollection
+    private List<Appointment> appointmentSchedules = new ArrayList<>();
 
     public void prescribeMed()
     {

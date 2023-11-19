@@ -5,10 +5,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PaymentMapper implements IBaseMapper<PaymentEntity, PaymentDto>
+public class PaymentMapper implements IBaseMapper<PaymentEntity, PaymentReqDto, PaymentResDto>
 {
     @Override
-    public PaymentEntity dtoToEntity(PaymentDto dto)
+    public PaymentEntity dtoToEntity(PaymentReqDto dto)
     {
         PaymentEntity payment = new PaymentEntity();
         BeanUtils.copyProperties(dto, payment);
@@ -16,9 +16,9 @@ public class PaymentMapper implements IBaseMapper<PaymentEntity, PaymentDto>
     }
 
     @Override
-    public PaymentDto entityToDto(PaymentEntity entity)
+    public PaymentResDto entityToDto(PaymentEntity entity)
     {
-        PaymentDto paymentDto = new PaymentDto();
+        PaymentResDto paymentDto = new PaymentResDto();
         BeanUtils.copyProperties(entity, paymentDto);
         return paymentDto;
     }

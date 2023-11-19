@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/receptionists")
-public class ReceptionistController extends BaseController<ReceptionistService, ReceptionistDto>
+public class ReceptionistController extends BaseController<ReceptionistService, ReceptionistReqDto, ReceptionistResDto>
 {
     public ReceptionistController(ReceptionistService service)
     {
@@ -17,7 +17,7 @@ public class ReceptionistController extends BaseController<ReceptionistService, 
 
     @GetMapping("/getAll")
     @Override
-    public List<ReceptionistDto> getAll()
+    public List<ReceptionistResDto> getAll()
     {
         return super.getAll();
     }
@@ -25,28 +25,28 @@ public class ReceptionistController extends BaseController<ReceptionistService, 
 
     @PostMapping("/create")
     @Override
-    public ReceptionistDto save(@RequestBody ReceptionistDto receptionist)
+    public ReceptionistResDto save(@RequestBody ReceptionistReqDto receptionist)
     {
         return super.save(receptionist);
     }
 
     @GetMapping("/getById/{id}")
     @Override
-    public ReceptionistDto getById(@PathVariable Long id) throws DeletedException
+    public ReceptionistResDto getById(@PathVariable Long id) throws DeletedException
     {
         return super.getById(id);
     }
 
     @GetMapping("/getByName/{name}")
     @Override
-    public ReceptionistDto getByName(@PathVariable String name) throws Exception
+    public ReceptionistResDto getByName(@PathVariable String name) throws Exception
     {
         return super.getByName(name);
     }
 
     @PutMapping("/update")
     @Override
-    public ReceptionistDto update (@RequestBody ReceptionistDto receptionist) throws DeletedException
+    public ReceptionistResDto update (@RequestBody ReceptionistReqDto receptionist) throws DeletedException
     {
         return super.update(receptionist);
     }

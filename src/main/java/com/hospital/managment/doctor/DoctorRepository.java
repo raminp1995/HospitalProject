@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DoctorRepository extends IBaseRepository<DoctorEntity>
 {
+    DoctorEntity findByFirstNameAndLastName(String firstName, String lastName) throws Exception;
 }

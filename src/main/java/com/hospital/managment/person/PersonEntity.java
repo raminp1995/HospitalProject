@@ -20,7 +20,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Entity
 //@MappedSuperclass
+@Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class PersonEntity extends BaseEntity
 {
@@ -32,8 +34,14 @@ public abstract class PersonEntity extends BaseEntity
     @Column
     private String lastName;
 
-    @Column
-    private Gender gender;
+    //@NotNull
+    //@NotEmpty
+    //@UniqueElements
+    private String nCode;
+
+//    @Column
+//    @Enumerated(EnumType.STRING)
+//    private Enum<Gender> gender;
 
     @Temporal(TemporalType.DATE)
     private LocalDate birthDate;
@@ -47,9 +55,4 @@ public abstract class PersonEntity extends BaseEntity
 
     @Email
     private String eMail;
-
-    //@NotNull
-    //@NotEmpty
-    //@UniqueElements
-    private String nCode;
 }

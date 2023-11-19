@@ -15,12 +15,12 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 
-public class BaseService<E extends BaseEntity, D extends BaseDto> implements IBaseService<D>
+public class BaseService<E extends BaseEntity, ReqDto extends BaseDto, ResDto extends BaseDto> implements IBaseService<ReqDto, ResDto>
 {
     private final IBaseRepository<E> baseRepository;
-    private final IBaseMapper<E, D> baseMapper;
+    private final IBaseMapper<E, ReqDto, ResDto> baseMapper;
 
-    public BaseService(IBaseRepository<E> baseRepository, IBaseMapper<E, D> baseMapper)
+    public BaseService(IBaseRepository<E> baseRepository, IBaseMapper<E, ReqDto, ResDto> baseMapper)
     {
         this.baseRepository = baseRepository;
         this.baseMapper = baseMapper;
@@ -28,19 +28,19 @@ public class BaseService<E extends BaseEntity, D extends BaseDto> implements IBa
 
 
     @Override
-    public List<D> getAll()
+    public List<ResDto> getAll()
     {
         return baseRepository.findAll().stream().filter(i -> !i.getDeleted()).map(baseMapper::entityToDto).toList();
     }
 
     @Override
-    public D save(D dto)
+    public ResDto save(ReqDto dto)
     {
         return baseMapper.entityToDto(baseRepository.save(baseMapper.dtoToEntity(dto)));
     }
 
     @Override
-    public D update(D dto) throws DeletedException
+    public ResDto update(ReqDto dto) throws DeletedException
     {
         E entity = baseRepository.findById(dto.getId()).orElse(null);
 
@@ -63,7 +63,7 @@ public class BaseService<E extends BaseEntity, D extends BaseDto> implements IBa
     }
 
     @Override
-    public D getById(Long id) throws DeletedException
+    public ResDto getById(Long id) throws DeletedException
     {
 
         if (baseRepository.findById(id).isPresent())
@@ -84,9 +84,9 @@ public class BaseService<E extends BaseEntity, D extends BaseDto> implements IBa
     }
 
     @Override
-    public D getByName(String name) throws Exception
+    public ResDto getByName(String name) throws Exception
     {
-        E entity = baseRepository.findByName(name);
+        E entity = baseRepository.findByFirstName(name);
 
         if (entity != null)
         {
@@ -106,6 +106,28 @@ public class BaseService<E extends BaseEntity, D extends BaseDto> implements IBa
     }
 
 
+//    public D findByFirstName(String name) throws Exception
+//    {
+//        E entity = baseRepository.findByFirstName(name);
+//
+//        if (entity != null)
+//        {
+//            if (!entity.getDeleted())
+//            {
+//                return baseMapper.entityToDto(entity);
+//            }
+//            else
+//            {
+//                throw new DeletedException();
+//            }
+//        }
+//        else
+//        {
+//            throw new NoSuchElementException();
+//        }
+//    }
+
+
     public void delete (Long id) throws Exception
     {
         E entity = baseRepository.findById(id).orElse(null);
@@ -122,6 +144,7 @@ public class BaseService<E extends BaseEntity, D extends BaseDto> implements IBa
             }
         }
     }
+
 
     public static void copyNonNullProperties(Object source, Object target)
     {

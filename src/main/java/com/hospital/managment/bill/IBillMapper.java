@@ -5,6 +5,9 @@ import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
-public interface IBillMapper extends IBaseMapper<BillEntity, BillDto>
+public interface IBillMapper extends IBaseMapper<BillEntity, BillReqDto, BillResDto>
 {
+//    BillEntity dtoToEntity (BillReqDto dto);
+//
+//    BillResDto entityToDto (BillEntity entity);
 }

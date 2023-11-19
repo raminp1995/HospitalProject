@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/diagnoses")
-public class DiagnoseController extends BaseController<DiagnoseService, DiagnoseDto>
+public class DiagnoseController extends BaseController<DiagnoseService, DiagnoseReqDto, DiagnoseResDto>
 {
     public DiagnoseController(DiagnoseService service)
     {
@@ -17,7 +17,7 @@ public class DiagnoseController extends BaseController<DiagnoseService, Diagnose
 
     @GetMapping("/getAll")
     @Override
-    public List<DiagnoseDto> getAll()
+    public List<DiagnoseResDto> getAll()
     {
         return super.getAll();
     }
@@ -25,28 +25,28 @@ public class DiagnoseController extends BaseController<DiagnoseService, Diagnose
 
     @PostMapping("/create")
     @Override
-    public DiagnoseDto save(@RequestBody DiagnoseDto diagnose)
+    public DiagnoseResDto save(@RequestBody DiagnoseReqDto diagnose)
     {
         return super.save(diagnose);
     }
 
     @GetMapping("/getById/{id}")
     @Override
-    public DiagnoseDto getById(@PathVariable Long id) throws DeletedException
+    public DiagnoseResDto getById(@PathVariable Long id) throws DeletedException
     {
         return super.getById(id);
     }
 
     @GetMapping("/getByName/{name}")
     @Override
-    public DiagnoseDto getByName(@PathVariable String name) throws Exception
+    public DiagnoseResDto getByName(@PathVariable String name) throws Exception
     {
         return super.getByName(name);
     }
 
     @PutMapping("/update")
     @Override
-    public DiagnoseDto update (@RequestBody DiagnoseDto diagnose) throws DeletedException
+    public DiagnoseResDto update (@RequestBody DiagnoseReqDto diagnose) throws DeletedException
     {
         return super.update(diagnose);
     }

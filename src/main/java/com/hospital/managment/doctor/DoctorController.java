@@ -2,22 +2,26 @@ package com.hospital.managment.doctor;
 
 import com.hospital.base.controller.BaseController;
 import com.hospital.base.exception.DeletedException;
+import com.hospital.managment.timeSlot.ITimeSlotRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/doctors")
-public class DoctorController extends BaseController<DoctorService, DoctorDto>
+public class DoctorController extends BaseController<DoctorService, DoctorReqDto, DoctorResDto>
 {
-    public DoctorController(DoctorService service)
+    private final DoctorService doctorService;
+
+    public DoctorController(DoctorService service, DoctorService doctorService)
     {
         super(service);
+        this.doctorService = doctorService;
     }
 
     @GetMapping("/getAll")
     @Override
-    public List<DoctorDto> getAll()
+    public List<DoctorResDto> getAll()
     {
         return super.getAll();
     }
@@ -25,28 +29,28 @@ public class DoctorController extends BaseController<DoctorService, DoctorDto>
 
     @PostMapping("/create")
     @Override
-    public DoctorDto save(@RequestBody DoctorDto doctor)
+    public DoctorResDto save(@RequestBody DoctorReqDto doctor)
     {
+        doctorService.saveTimeSlot(doctor.getTimeSlot());
         return super.save(doctor);
     }
 
     @GetMapping("/getById/{id}")
-    @Override
-    public DoctorDto getById(@PathVariable Long id) throws DeletedException
+    public DoctorResDto getById(@PathVariable Long id) throws DeletedException
     {
         return super.getById(id);
     }
 
-    @GetMapping("/getByName/{name}")
-    @Override
-    public DoctorDto getByName(@PathVariable String name) throws Exception
+    @GetMapping("doctorInfo/{firstName}&{lastName}")
+
+    public DoctorResDto getByName(@PathVariable String firstName, @PathVariable String lastName) throws Exception
     {
-        return super.getByName(name);
+        return doctorService.docInfo(firstName, lastName);
     }
 
     @PutMapping("/update")
     @Override
-    public DoctorDto update (@RequestBody DoctorDto doctor) throws DeletedException
+    public DoctorResDto update (@RequestBody DoctorReqDto doctor) throws DeletedException
     {
         return super.update(doctor);
     }

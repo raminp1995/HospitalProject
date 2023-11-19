@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payments")
-public class PaymentController extends BaseController<PaymentService, PaymentDto>
+public class PaymentController extends BaseController<PaymentService, PaymentReqDto, PaymentResDto>
 {
     public PaymentController(PaymentService service)
     {
@@ -17,7 +17,7 @@ public class PaymentController extends BaseController<PaymentService, PaymentDto
 
     @GetMapping("/getAll")
     @Override
-    public List<PaymentDto> getAll()
+    public List<PaymentResDto> getAll()
     {
         return super.getAll();
     }
@@ -25,28 +25,28 @@ public class PaymentController extends BaseController<PaymentService, PaymentDto
 
     @PostMapping("/create")
     @Override
-    public PaymentDto save(@RequestBody PaymentDto payment)
+    public PaymentResDto save(@RequestBody PaymentReqDto payment)
     {
         return super.save(payment);
     }
 
     @GetMapping("/getById/{id}")
     @Override
-    public PaymentDto getById(@PathVariable Long id) throws DeletedException
+    public PaymentResDto getById(@PathVariable Long id) throws DeletedException
     {
         return super.getById(id);
     }
 
     @GetMapping("/getByName/{name}")
     @Override
-    public PaymentDto getByName(@PathVariable String name) throws Exception
+    public PaymentResDto getByName(@PathVariable String name) throws Exception
     {
         return super.getByName(name);
     }
 
     @PutMapping("/update")
     @Override
-    public PaymentDto update (@RequestBody PaymentDto payment) throws DeletedException
+    public PaymentResDto update (@RequestBody PaymentReqDto payment) throws DeletedException
     {
         return super.update(payment);
     }

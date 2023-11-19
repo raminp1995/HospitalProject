@@ -1,4 +1,4 @@
-package com.hospital.managment.receptionist;
+package com.hospital.managment.diagnose;
 
 import com.hospital.base.model.dto.BaseDto;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 //@AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ReceptionistDto extends BaseDto
+public class DiagnoseResDto extends BaseDto
 {
 }

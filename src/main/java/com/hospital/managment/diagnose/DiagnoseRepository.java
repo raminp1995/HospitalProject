@@ -9,7 +9,7 @@ public interface DiagnoseRepository extends IBaseRepository<DiagnoseEntity>
 {
     @Override
     @Transient
-    default DiagnoseEntity findByName(String name) throws Exception
+    default DiagnoseEntity findByFirstName(String name) throws Exception
     {
         return null;
     }

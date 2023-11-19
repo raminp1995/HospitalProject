@@ -5,6 +5,7 @@ import com.hospital.managment.payment.PaymentEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "receptionist")
 public class ReceptionistEntity extends AdministrativeStaffEntity
 {
     @OneToMany(mappedBy = "receptionist")

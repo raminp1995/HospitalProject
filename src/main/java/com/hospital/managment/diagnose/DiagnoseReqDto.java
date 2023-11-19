@@ -7,6 +7,6 @@ import lombok.*;
 //@AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class DiagnoseDto extends BaseDto
+public class DiagnoseReqDto extends BaseDto
 {
 }

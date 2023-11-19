@@ -1,5 +1,4 @@
-package com.hospital.managment.hospital;
-
+package com.hospital.managment.administrativeStaff;
 
 import com.hospital.base.model.dto.BaseDto;
 import lombok.AllArgsConstructor;
@@ -8,10 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
 //@AllArgsConstructor
 @NoArgsConstructor
-public class HospitalDto extends BaseDto
+@Data
+public class AdminStaffResDto extends BaseDto
 {
-
 }
