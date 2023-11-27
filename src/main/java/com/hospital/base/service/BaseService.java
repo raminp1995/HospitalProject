@@ -8,6 +8,9 @@ import com.hospital.base.repository.IBaseRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import java.beans.PropertyDescriptor;
 import java.util.HashSet;
 import java.util.List;
@@ -28,19 +31,19 @@ public class BaseService<E extends BaseEntity, ReqDto extends BaseDto, ResDto ex
 
 
     @Override
-    public List<ResDto> getAll()
+    public ResponseEntity<List<ResDto>> getAll()
     {
-        return baseRepository.findAll().stream().filter(i -> !i.getDeleted()).map(baseMapper::entityToDto).toList();
+        return new ResponseEntity<>(baseRepository.findAll().stream().filter(i -> !i.getDeleted()).map(baseMapper::entityToDto).toList(), HttpStatus.OK);
     }
 
     @Override
-    public ResDto save(ReqDto dto)
+    public ResponseEntity<ResDto> save(ReqDto dto)
     {
-        return baseMapper.entityToDto(baseRepository.save(baseMapper.dtoToEntity(dto)));
+        return new ResponseEntity<>(baseMapper.entityToDto(baseRepository.save(baseMapper.dtoToEntity(dto))), HttpStatus.OK);
     }
 
     @Override
-    public ResDto update(ReqDto dto) throws DeletedException
+    public ResponseEntity<ResDto> update(ReqDto dto) throws DeletedException
     {
         E entity = baseRepository.findById(dto.getId()).orElse(null);
 
@@ -49,7 +52,7 @@ public class BaseService<E extends BaseEntity, ReqDto extends BaseDto, ResDto ex
             if (!entity.getDeleted())
             {
                 copyNonNullProperties(dto, entity);
-                return baseMapper.entityToDto(baseRepository.save(entity));
+                return new ResponseEntity<>(baseMapper.entityToDto(baseRepository.save(entity)), HttpStatus.OK);
             }
             else
             {
@@ -63,14 +66,14 @@ public class BaseService<E extends BaseEntity, ReqDto extends BaseDto, ResDto ex
     }
 
     @Override
-    public ResDto getById(Long id) throws DeletedException
+    public ResponseEntity<ResDto> getById(Long id) throws DeletedException
     {
 
         if (baseRepository.findById(id).isPresent())
         {
             if (!baseRepository.findById(id).get().getDeleted())
             {
-                return baseMapper.entityToDto(baseRepository.findById(id).get());
+                return new ResponseEntity<>(baseMapper.entityToDto(baseRepository.findById(id).get()), HttpStatus.OK);
             }
             else
             {
@@ -84,7 +87,7 @@ public class BaseService<E extends BaseEntity, ReqDto extends BaseDto, ResDto ex
     }
 
     @Override
-    public ResDto getByName(String name) throws Exception
+    public ResponseEntity<ResDto> getByName(String name) throws Exception
     {
         E entity = baseRepository.findByFirstName(name);
 
@@ -92,7 +95,7 @@ public class BaseService<E extends BaseEntity, ReqDto extends BaseDto, ResDto ex
         {
             if (!entity.getDeleted())
             {
-                return baseMapper.entityToDto(entity);
+                return new ResponseEntity<>(baseMapper.entityToDto(entity), HttpStatus.OK);
             }
             else
             {
@@ -104,28 +107,6 @@ public class BaseService<E extends BaseEntity, ReqDto extends BaseDto, ResDto ex
             throw new NoSuchElementException();
         }
     }
-
-
-//    public D findByFirstName(String name) throws Exception
-//    {
-//        E entity = baseRepository.findByFirstName(name);
-//
-//        if (entity != null)
-//        {
-//            if (!entity.getDeleted())
-//            {
-//                return baseMapper.entityToDto(entity);
-//            }
-//            else
-//            {
-//                throw new DeletedException();
-//            }
-//        }
-//        else
-//        {
-//            throw new NoSuchElementException();
-//        }
-//    }
 
 
     public void delete (Long id) throws Exception

@@ -3,6 +3,7 @@ package com.hospital.managment.patient;
 import com.hospital.base.controller.BaseController;
 import com.hospital.base.exception.DeletedException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class PatientController extends BaseController<PatientService, PatientReq
 
     @GetMapping("/getAll")
     @Override
-    public List<PatientResDto> getAll()
+    public ResponseEntity<List<PatientResDto>> getAll()
     {
         return super.getAll();
     }
@@ -29,28 +30,28 @@ public class PatientController extends BaseController<PatientService, PatientReq
 
     @PostMapping("/create")
     @Override
-    public PatientResDto save(@RequestBody PatientReqDto patient)
+    public ResponseEntity<PatientResDto> save(@RequestBody PatientReqDto patient)
     {
         return super.save(patient);
     }
 
     @GetMapping("/getById/{id}")
     @Override
-    public PatientResDto getById(@PathVariable Long id) throws DeletedException
+    public ResponseEntity<PatientResDto> getById(@PathVariable Long id) throws DeletedException
     {
         return super.getById(id);
     }
 
     @GetMapping("/getByName/{name}")
     @Override
-    public PatientResDto getByName(@PathVariable String name) throws Exception
+    public ResponseEntity<PatientResDto> getByName(@PathVariable String name) throws Exception
     {
         return super.getByName(name);
     }
 
     @PutMapping("/update")
     @Override
-    public PatientResDto update (@RequestBody PatientReqDto patient) throws DeletedException
+    public ResponseEntity<PatientResDto> update (@RequestBody PatientReqDto patient) throws DeletedException
     {
         return super.update(patient);
     }
@@ -73,5 +74,19 @@ public class PatientController extends BaseController<PatientService, PatientReq
     {
         //httpServletRequest.getPathInfo()
         return patientService.makeAppointment(patientId, drFName, drLName, day, hour);
+    }
+
+    @PostMapping("/cancelAppointment/{patientId}&{appointmentId}")
+    @Override
+    public void cancelAppointment(@PathVariable Long patientId,@PathVariable Long appointmentId) throws DeletedException
+    {
+        patientService.cancelAppointment(patientId, appointmentId);
+    }
+
+    @GetMapping("/viewAppointment/{patientId}")
+    @Override
+    public List<PatientAppointment> viewPatientAppointment(@PathVariable Long patientId)
+    {
+        return patientService.viewPatientAppointment(patientId);
     }
 }

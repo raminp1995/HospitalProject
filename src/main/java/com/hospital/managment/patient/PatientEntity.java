@@ -14,11 +14,12 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 @Table(name = "patient")
-public class PatientEntity extends PersonEntity implements DoctorDetails
+public class PatientEntity extends PersonEntity
 {
 
     //private Long patientCode;
@@ -30,7 +31,7 @@ public class PatientEntity extends PersonEntity implements DoctorDetails
     private BillEntity bill;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "doctor_patient",
             joinColumns = @JoinColumn(name = "patient_id"),
@@ -42,21 +43,8 @@ public class PatientEntity extends PersonEntity implements DoctorDetails
 
     private String bloodGroup;
 
-    @Override
-    public void viewDoctors()
-    {
+    @OneToMany(targetEntity = PatientAppointment.class, cascade = CascadeType.ALL)
+    //@JoinColumn(name = "patinetAppointmentId")
+    private List<PatientAppointment> patientAppointments = new ArrayList<>();
 
-    }
-
-    @Override
-    public void viewMedicine()
-    {
-
-    }
-
-    @Override
-    public void DoctorSchedule()
-    {
-
-    }
 }

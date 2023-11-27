@@ -4,6 +4,8 @@ import com.hospital.base.mapper.IBaseMapper;
 import com.hospital.base.repository.IBaseRepository;
 import com.hospital.base.service.BaseService;
 import com.hospital.managment.doctor.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,23 +21,9 @@ public class AdminStaffService extends BaseService<AdministrativeStaffEntity, Ad
     }
 
     @Override
-    public DoctorResDto doctorInformation(String firstName, String lastName) throws Exception
+    public ResponseEntity<DoctorResDto> doctorInformation(String firstName, String lastName) throws Exception
     {
         return doctorService.docInfo(firstName, lastName);
     }
 
-    public boolean login()
-    {
-        return false;
-    }
-
-    public String patientBill()
-    {
-        return "";
-    }
-
-    public void account()
-    {
-
-    }
 }

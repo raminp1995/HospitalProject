@@ -1,12 +1,11 @@
 package com.hospital.managment.person;
 
 import com.hospital.base.model.dto.BaseDto;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 //@AllArgsConstructor
 public class PersonDto extends BaseDto

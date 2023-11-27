@@ -2,21 +2,22 @@ package com.hospital.base.service;
 
 import com.hospital.base.exception.DeletedException;
 import com.hospital.managment.doctor.DoctorEntity;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 
 public interface IBaseService<ReqDto, ResDto>
 {
-    List<ResDto> getAll();
+    ResponseEntity<List<ResDto>> getAll();
 
-    ResDto save(ReqDto dto);
+    ResponseEntity<ResDto> save(ReqDto dto);
 
-    ResDto update (ReqDto dto)throws DeletedException;
+    ResponseEntity<ResDto> update (ReqDto dto)throws DeletedException;
 
-    ResDto getById (Long Id) throws DeletedException;
+    ResponseEntity<ResDto> getById (Long Id) throws DeletedException;
 
-    ResDto getByName (String name) throws Exception;
+    ResponseEntity<ResDto> getByName (String name) throws Exception;
 
     void delete (Long id) throws Exception;
 

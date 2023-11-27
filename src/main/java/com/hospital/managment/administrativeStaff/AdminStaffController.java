@@ -4,6 +4,7 @@ import com.hospital.base.controller.BaseController;
 import com.hospital.base.exception.DeletedException;
 import com.hospital.managment.doctor.DoctorReqDto;
 import com.hospital.managment.doctor.DoctorResDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class AdminStaffController extends BaseController<AdminStaffService, Admi
 
     @GetMapping("/getAll")
     @Override
-    public List<AdminStaffResDto> getAll()
+    public ResponseEntity<List<AdminStaffResDto>> getAll()
     {
         return super.getAll();
     }
@@ -31,28 +32,28 @@ public class AdminStaffController extends BaseController<AdminStaffService, Admi
 
     @PostMapping("/create")
     @Override
-    public AdminStaffResDto save(@RequestBody AdminStaffReqDto adminStaffDto)
+    public ResponseEntity<AdminStaffResDto> save(@RequestBody AdminStaffReqDto adminStaffDto)
     {
         return super.save(adminStaffDto);
     }
 
     @GetMapping("/getById/{id}")
     @Override
-    public AdminStaffResDto getById(@PathVariable Long id) throws DeletedException
+    public ResponseEntity<AdminStaffResDto> getById(@PathVariable Long id) throws DeletedException
     {
         return super.getById(id);
     }
 
     @GetMapping("/getByName/{name}")
     @Override
-    public AdminStaffResDto getByName(@PathVariable String name) throws Exception
+    public ResponseEntity<AdminStaffResDto> getByName(@PathVariable String name) throws Exception
     {
         return super.getByName(name);
     }
 
     @PutMapping("/update")
     @Override
-    public AdminStaffResDto update (@RequestBody AdminStaffReqDto adminStaffDto) throws DeletedException
+    public ResponseEntity<AdminStaffResDto> update (@RequestBody AdminStaffReqDto adminStaffDto) throws DeletedException
     {
         return super.update(adminStaffDto);
     }
@@ -65,7 +66,7 @@ public class AdminStaffController extends BaseController<AdminStaffService, Admi
     }
 
     @GetMapping("/doctorDetail/{firstName}&{lastName}")
-    public DoctorResDto doctorInformation(@PathVariable String firstName, @PathVariable String lastName) throws Exception
+    public ResponseEntity<DoctorResDto> doctorInformation(@PathVariable String firstName, @PathVariable String lastName) throws Exception
     {
         return service.doctorInformation(firstName, lastName);
     }

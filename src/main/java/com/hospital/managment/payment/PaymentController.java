@@ -2,6 +2,7 @@ package com.hospital.managment.payment;
 
 import com.hospital.base.controller.BaseController;
 import com.hospital.base.exception.DeletedException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class PaymentController extends BaseController<PaymentService, PaymentReq
 
     @GetMapping("/getAll")
     @Override
-    public List<PaymentResDto> getAll()
+    public ResponseEntity<List<PaymentResDto>> getAll()
     {
         return super.getAll();
     }
@@ -25,28 +26,28 @@ public class PaymentController extends BaseController<PaymentService, PaymentReq
 
     @PostMapping("/create")
     @Override
-    public PaymentResDto save(@RequestBody PaymentReqDto payment)
+    public ResponseEntity<PaymentResDto> save(@RequestBody PaymentReqDto payment)
     {
         return super.save(payment);
     }
 
     @GetMapping("/getById/{id}")
     @Override
-    public PaymentResDto getById(@PathVariable Long id) throws DeletedException
+    public ResponseEntity<PaymentResDto> getById(@PathVariable Long id) throws DeletedException
     {
         return super.getById(id);
     }
 
     @GetMapping("/getByName/{name}")
     @Override
-    public PaymentResDto getByName(@PathVariable String name) throws Exception
+    public ResponseEntity<PaymentResDto> getByName(@PathVariable String name) throws Exception
     {
         return super.getByName(name);
     }
 
     @PutMapping("/update")
     @Override
-    public PaymentResDto update (@RequestBody PaymentReqDto payment) throws DeletedException
+    public ResponseEntity<PaymentResDto> update (@RequestBody PaymentReqDto payment) throws DeletedException
     {
         return super.update(payment);
     }

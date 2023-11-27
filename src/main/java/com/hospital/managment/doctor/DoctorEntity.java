@@ -5,19 +5,15 @@ import com.hospital.managment.patient.PatientEntity;
 import com.hospital.managment.staff.StaffEntity;
 import com.hospital.managment.timeSlot.TimeSlotEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "doctor")
@@ -38,8 +34,16 @@ public class DoctorEntity extends StaffEntity
     @JoinColumn(name = "timeSlotId")
     private TimeSlotEntity timeSlot;
 
-    @ElementCollection
-    private List<Appointment> appointmentSchedules = new ArrayList<>();
+    @OneToMany(targetEntity = DoctorAppointment.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "doctorAppointmentId")
+    private List<DoctorAppointment> appointmentSchedules = new ArrayList<>();
+
+    @OneToMany(targetEntity = Prescription.class, cascade = CascadeType.ALL)
+    private List<Prescription> prescriptions = new ArrayList<>();
+
+    private String password;
+
+    private String role;
 
     public void prescribeMed()
     {

@@ -7,7 +7,4 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
 public interface IPatientMapper extends IBaseMapper<PatientEntity, PatientReqDto, PatientResDto>
 {
-//    PatientEntity dtoToEntity (PatientReqDto dto);
-//
-//    PatientResDto entityToDto (PatientEntity entity);
 }

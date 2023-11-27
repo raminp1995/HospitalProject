@@ -5,7 +5,12 @@ import com.hospital.base.repository.IBaseRepository;
 import com.hospital.base.service.BaseService;
 import com.hospital.managment.timeSlot.ITimeSlotRepository;
 import com.hospital.managment.timeSlot.TimeSlotEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class DoctorService extends BaseService<DoctorEntity, DoctorReqDto, DoctorResDto> implements IDoctorService
@@ -22,14 +27,43 @@ public class DoctorService extends BaseService<DoctorEntity, DoctorReqDto, Docto
     }
 
     @Override
-    public DoctorResDto docInfo(String firstName, String lastName) throws Exception
+    public ResponseEntity<DoctorResDto> docInfo(String firstName, String lastName) throws Exception
     {
         DoctorEntity doctor = doctorRepository.findByFirstNameAndLastName(firstName, lastName);
-        return doctorMapper.entityToDto(doctor);
+        return new ResponseEntity<>(doctorMapper.entityToDto(doctor), HttpStatus.OK);
     }
 
     public void saveTimeSlot (TimeSlotEntity entity)
     {
         timeSlotRepository.save(entity);
+    }
+
+    @Override
+    public ResponseEntity<List<DoctorAppointment>> viewAppointment(Long doctorId)
+    {
+        return new ResponseEntity<>(
+                Objects.requireNonNull(doctorRepository.findById(doctorId).orElse(null))
+                        .getAppointmentSchedules().stream().toList(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Boolean> doctorPrescribe(Long doctorId, Prescription prescription)
+    {
+        DoctorEntity doctorEntity = doctorRepository.findById(doctorId).orElse(null);
+        assert doctorEntity != null;
+        doctorEntity.getPrescriptions().add(prescription);
+        doctorRepository.save(doctorEntity);
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Prescription> viewPrescribe(Long doctorId, Long patientId)
+    {
+        DoctorEntity doctorEntity = doctorRepository.findById(doctorId).orElse(null);
+        assert doctorEntity != null;
+        return new ResponseEntity<>(
+                doctorEntity.getPrescriptions().stream()
+                        .filter(i -> i.getPatientId()
+                                .equals(patientId)).toList().get(0), HttpStatus.OK);
     }
 }

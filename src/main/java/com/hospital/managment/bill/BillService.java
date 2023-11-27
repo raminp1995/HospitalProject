@@ -5,7 +5,11 @@ import com.hospital.base.mapper.IBaseMapper;
 import com.hospital.base.repository.IBaseRepository;
 import com.hospital.base.service.BaseService;
 import com.hospital.managment.patient.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class BillService extends BaseService<BillEntity, BillReqDto, BillResDto>
@@ -17,10 +21,10 @@ public class BillService extends BaseService<BillEntity, BillReqDto, BillResDto>
         this.patientRepository = patientRepository;
     }
 
-    public String billDetail(Long id) throws DeletedException
+    public ResponseEntity<String> billDetail(Long id) throws DeletedException
     {
-        BillResDto dto = super.getById(id);
-        double result = dto.getRoomCost() + dto.getLabCost() + dto.getMedCost();
+        ResponseEntity<BillResDto> dto = super.getById(id);
+        double result = Objects.requireNonNull(dto.getBody()).getRoomCost() + dto.getBody().getLabCost() + dto.getBody().getMedCost();
 
         PatientEntity patientEntity = patientRepository.findById(id).get();
 
@@ -29,14 +33,14 @@ public class BillService extends BaseService<BillEntity, BillReqDto, BillResDto>
                 + "Full Name: " + patientEntity.getFirstName() + " " + patientEntity.getLastName() + "\n"
                 + "National Code: " + patientEntity.getNCode() + "\n"
                 + "Phone Number: " + patientEntity.getPhone() + "\n"
-                + "E-Mail: " + patientEntity.getEMail() + "\n"
+                + "E-Mail: " + patientEntity.getEmail() + "\n"
                 + "Bill Detail: \n{ \n"
-                + "\tBill Number: " + dto.getBillNumber() + "\n"
-                + "\tRoom Cost: " + dto.getRoomCost() + " $\n"
-                + "\tMedicinely Cost: " + dto.getMedCost() + " $\n"
-                + "\tLaboratory Cost: " + dto.getLabCost() + " $\n"
+                + "\tBill Number: " + dto.getBody().getBillNumber() + "\n"
+                + "\tRoom Cost: " + dto.getBody().getRoomCost() + " $\n"
+                + "\tMedicinely Cost: " + dto.getBody().getMedCost() + " $\n"
+                + "\tLaboratory Cost: " + dto.getBody().getLabCost() + " $\n"
                 + "\tAll Costs: " + result + " $" +"\n}";
 
-        return print;
+        return new ResponseEntity<>(print, HttpStatus.OK);
     }
 }
